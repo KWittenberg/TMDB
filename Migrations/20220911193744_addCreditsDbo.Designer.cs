@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TMDB.MVC.Data;
 
@@ -11,9 +12,10 @@ using TMDB.MVC.Data;
 namespace TMDB.MVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220911193744_addCreditsDbo")]
+    partial class addCreditsDbo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,46 +26,52 @@ namespace TMDB.MVC.Migrations
 
             modelBuilder.Entity("TMDB.MVC.Models.CastDbo", b =>
                 {
-                    b.Property<int?>("id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
 
                     b.Property<int>("CreditsDboId")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("adult")
+                    b.Property<bool>("adult")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("cast_id")
+                    b.Property<int>("cast_id")
                         .HasColumnType("int");
 
                     b.Property<string>("character")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("credit_id")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("gender")
+                    b.Property<int>("gender")
                         .HasColumnType("int");
 
                     b.Property<string>("known_for_department")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("order")
+                    b.Property<int>("order")
                         .HasColumnType("int");
 
                     b.Property<string>("original_name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("popularity")
+                    b.Property<double>("popularity")
                         .HasColumnType("float");
 
                     b.Property<string>("profile_path")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
@@ -88,43 +96,50 @@ namespace TMDB.MVC.Migrations
 
             modelBuilder.Entity("TMDB.MVC.Models.CrewDbo", b =>
                 {
-                    b.Property<int?>("id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
 
                     b.Property<int>("CreditsDboId")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("adult")
+                    b.Property<bool>("adult")
                         .HasColumnType("bit");
 
                     b.Property<string>("credit_id")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("department")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("gender")
+                    b.Property<int>("gender")
                         .HasColumnType("int");
 
                     b.Property<string>("job")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("known_for_department")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("original_name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("popularity")
+                    b.Property<double>("popularity")
                         .HasColumnType("float");
 
                     b.Property<string>("profile_path")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");

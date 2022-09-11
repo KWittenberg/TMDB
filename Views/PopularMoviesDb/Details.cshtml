@@ -4,8 +4,10 @@
     ViewData["Title"] = "DetailsDb";
     var imageUrl = "https://image.tmdb.org/t/p/original" + Model.poster_path;
     var genres = await movieService.GetGenreAsync(Model.MovieDetailsId);
+    var casts = await movieService.GetCastAsync(Model.MovieDetailsId);
+    var crews = await movieService.GetCrewAsync(Model.MovieDetailsId);
     //var reviews = await movieService.GetMovieReview(Model.id);
-    //var credits = await movieService.GetMovieCredits(Model.id);
+    //var credits = await movieService.GetMovieCredits(Model.MovieDetailsId);
 }
 <!-- Anime Section Begin -->
 <section class="anime-details spad">
@@ -87,41 +89,41 @@
         </div>
 
         <div class="row row-cols-1 row-cols-md-5 g-3">
-            @*@foreach (var item in credits.cast.OrderBy(x => x.order).Take(5))
+            @foreach (var item in casts.OrderBy(x => x.order).Take(5))
             {
-            var castUrl = "https://image.tmdb.org/t/p/original" + item.profile_path;
-            <div class="product__item">
-            <div class="product__item__pic set-bg" data-setbg="@castUrl">
-            <img class="rounded-3" src="@castUrl"/>
-            <div class="ep">@item.popularity</div>
-            </div>
-            <div class="product__item__text">
-            <ul>
-            <li>@item.character</li>
-            </ul>
-            <h5><a href="#">@item.name</a></h5>
-            </div>
-            </div>
-            }*@
+                var castUrl = "https://image.tmdb.org/t/p/original" + item.profile_path;
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" data-setbg="@castUrl">
+                        <img class="rounded-3" src="@castUrl" />
+                        <div class="ep">@item.popularity</div>
+                    </div>
+                    <div class="product__item__text">
+                        <ul>
+                            <li>@item.character</li>
+                        </ul>
+                        <h5><a href="#">@item.name</a></h5>
+                    </div>
+                </div>
+            }
         </div>
 
         <div class="row row-cols-1 row-cols-md-5 g-3">
-            @*@foreach (var item in credits.crew.OrderBy(x => x.credit_id).Take(5))
+            @foreach (var item in crews.OrderBy(x => x.credit_id).Take(5))
             {
-            var crewUrl = "https://image.tmdb.org/t/p/original" + item.profile_path;
-            <div class="product__item">
-            <div class="product__item__pic set-bg" data-setbg="@crewUrl">
-            <img class="rounded-3" src="@crewUrl"/>
-            <div class="ep">@item.popularity</div>
-            </div>
-            <div class="product__item__text">
-            <ul>
-            <li>@item.job</li>
-            </ul>
-            <h5><a href="#">@item.name</a></h5>
-            </div>
-            </div>
-            }*@
+                var crewUrl = "https://image.tmdb.org/t/p/original" + item.profile_path;
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" data-setbg="@crewUrl">
+                        <img class="rounded-3" src="@crewUrl" />
+                        <div class="ep">@item.popularity</div>
+                    </div>
+                    <div class="product__item__text">
+                        <ul>
+                            <li>@item.job</li>
+                        </ul>
+                        <h5><a href="#">@item.name</a></h5>
+                    </div>
+                </div>
+            }
         </div>
 
 

@@ -14,4 +14,11 @@ public class ApplicationDbContext : DbContext
     public DbSet<ProductionCompanyDbo> ProductionCompanyDbo { get; set; }
     public DbSet<ProductionCountryDbo> ProductionCountryDbo { get; set; }
     public DbSet<SpokenLanguageDbo> SpokenLanguageDbo { get; set; }
+
+
+    public DbSet<CreditsDbo> CreditsDbo { get; set; }
+    public DbSet<CastDbo> CastDbo { get; set; }
+    public DbSet<CrewDbo> CrewDbo { get; set; }
+
+
 }

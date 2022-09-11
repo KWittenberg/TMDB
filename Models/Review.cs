@@ -19,5 +19,3 @@ public class AuthorDetails
     public string? avatar_path { get; set; }
     public double? rating { get; set; }
 }
-
-

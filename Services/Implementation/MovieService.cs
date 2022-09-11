@@ -109,6 +109,20 @@ public class MovieService : IMovieService
 
 
     /// <summary>
+    /// GetCreditsAsync
+    /// </summary>
+    /// <returns></returns>
+    public async Task<List<CreditsDbo>> GetCreditsAsync(int? id)
+    {
+        var dbo = await db.CreditsDbo
+            .Include(x=>x.cast)
+            .Include(x => x.crew)
+            .Where(x => x.id == id).ToListAsync();
+        return dbo;
+    }
+
+
+    /// <summary>
     /// GetGenreAsync
     /// </summary>
     /// <returns></returns>
@@ -118,9 +132,25 @@ public class MovieService : IMovieService
         return dbo;
     }
 
+    /// <summary>
+    /// GetCastAsync
+    /// </summary>
+    /// <returns></returns>
+    public async Task<List<CastDbo>> GetCastAsync(int? id)
+    {
+        var dbo = await db.CastDbo.Where(x => x.CreditsDboId == id).ToListAsync();
+        return dbo;
+    }
 
-
-
+    /// <summary>
+    /// GetCrewAsync
+    /// </summary>
+    /// <returns></returns>
+    public async Task<List<CrewDbo>> GetCrewAsync(int? id)
+    {
+        var dbo = await db.CrewDbo.Where(x => x.CreditsDboId == id).ToListAsync();
+        return dbo;
+    }
 
 
 
@@ -157,9 +187,7 @@ public class MovieService : IMovieService
             }
         }
     }
-
-
-
+    
     /// <summary>
     /// ImportMovieDetailsToDb
     /// </summary>
@@ -190,4 +218,38 @@ public class MovieService : IMovieService
             }
         }
     }
+    
+    /// <summary>
+    /// ImportMovieCreditsToDb
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public async Task ImportMovieCreditsToDb(int? id)
+    {
+        System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+
+        var baseAddress = new Uri("http://api.themoviedb.org/3/");
+
+        using (var httpClient = new HttpClient { BaseAddress = baseAddress })
+        {
+            httpClient.DefaultRequestHeaders.TryAddWithoutValidation("accept", "application/json");
+
+            using (var response = await httpClient.GetAsync("movie/" + id + "/credits?api_key=" + TMDBApiKey.ApiKey + "&language=en-US"))
+            {
+                string responseData = await response.Content.ReadAsStringAsync();
+                var model = JsonConvert.DeserializeObject<CreditsBinding>(responseData);
+
+                var movieCredits = await db.CreditsDbo.FirstOrDefaultAsync(x => x.id == id);
+                if (movieCredits == null)
+                {
+                    var dbo = mapper.Map<CreditsDbo>(model);
+                    db.CreditsDbo.Add(dbo);
+                }
+                await db.SaveChangesAsync();
+            }
+        }
+    }
+
+
+
 }

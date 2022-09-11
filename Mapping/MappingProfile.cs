@@ -17,5 +17,9 @@ public class MappingProfile : Profile
         CreateMap<ProductionCountryBinding, ProductionCountryDbo>();
 
         CreateMap<SpokenLanguageBinding, SpokenLanguageDbo>();
+
+        CreateMap<CreditsBinding, CreditsDbo>();
+        CreateMap<CastBinding, CastDbo>();
+        CreateMap<CrewBinding, CrewDbo>();
     }
 }

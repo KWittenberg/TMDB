@@ -31,6 +31,8 @@ public class PopularMoviesDbController : Controller
     public async Task<IActionResult> Details(int? id)
     {
         await movieService.ImportMovieDetailsToDb(id);
+        await movieService.ImportMovieCreditsToDb(id);
+
         var movieDetails = await db.MovieDetailsDbo
             .Include(x => x.spoken_languages)
             .Include(x=>x.production_companies)
