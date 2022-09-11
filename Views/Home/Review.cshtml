@@ -1,0 +1,71 @@
+﻿@*@model IEnumerable<TMDB.MVC.Models.Review>*@
+@model TMDB.MVC.Models.Root
+@{
+    ViewData["Title"] = "Review";
+
+}
+<!-- REVIEW Section Begin -->
+<section class="anime-details spad">
+    <div class="container">
+        <div class="anime__details__content">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="anime__details__text">
+                        <div class="anime__details__title">
+                            <h3>@Model.id</h3><span>Model.original_title</span>
+                        </div>
+                        <div class="anime__details__rating">
+                            <div class="rating">
+                                <a href="#"><i class="fa fa-star"></i></a>
+                                <a href="#"><i class="fa fa-star"></i></a>
+                                <a href="#"><i class="fa fa-star"></i></a>
+                                <a href="#"><i class="fa fa-star"></i></a>
+                                <a href="#"><i class="fa fa-star-half-o"></i></a>
+                            </div>
+                            <span>Model.vote_count Votes</span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+                    <div class="anime__details__review">
+                        <div class="section-title"><h5>Reviews</h5></div>
+                        @foreach (var item in Model.results)
+                        {
+                            <div class="anime__review__item">
+                                <div class="anime__review__item__pic">
+                                    @if (item.author_details.avatar_path != null)
+                                    {
+                                        var avatarUrl = "https://image.tmdb.org/t/p/original" + @item.author_details.avatar_path;
+                                        <img src="@avatarUrl" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/img/user/user.png" />
+                                    }
+                                </div>
+                                <div class="anime__review__item__text">
+                                    <h6>@item.author - <span>@item.created_at</span></h6>
+                                    <p>@item.content</p>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                    <div class="anime__details__form">
+                        <div class="section-title">
+                            <h5>Your Comment</h5>
+                        </div>
+                        <form action="#">
+                            <textarea placeholder="Your Comment"></textarea>
+                            <button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Anime Section End -->

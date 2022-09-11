@@ -1,0 +1,158 @@
+﻿@model TMDB.MVC.Models.MovieDetails
+@{
+    ViewData["Title"] = "Details";
+    var imageUrl = "https://image.tmdb.org/t/p/original" + @Model.poster_path;
+}
+<!-- Anime Section Begin -->
+<section class="anime-details spad">
+    <div class="container">
+        <div class="anime__details__content">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="product__item__pic set-bg" data-setbg="@imageUrl">
+                        <img src="@imageUrl" alt="">
+                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="anime__details__text">
+                        <div class="anime__details__title">
+                            <h3>@Model.title</h3><span>@Model.original_title</span>
+                        </div>
+                        <div class="anime__details__rating">
+                            <div class="rating">
+                                <a href="#"><i class="fa fa-star"></i></a>
+                                <a href="#"><i class="fa fa-star"></i></a>
+                                <a href="#"><i class="fa fa-star"></i></a>
+                                <a href="#"><i class="fa fa-star"></i></a>
+                                <a href="#"><i class="fa fa-star-half-o"></i></a>
+                            </div>
+                            <span>@Model.vote_count Votes</span>
+                        </div>
+                        <p>@Model.overview</p>
+                        <div class="anime__details__widget">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <ul>
+                                        <li><span>Id:</span> @Model.id</li>
+                                        <li><span>IMDB:</span> @Model.imdb_id</li>
+                                        <li><span>Release Date:</span> @Model.release_date</li>
+                                        <li><span>Status:</span> @Model.status</li>
+                                        <li>
+                                            <span>Genre:</span>
+                                            @foreach (var item in Model.genres)
+                                            {
+                                                @item.name
+
+                                                <text>&nbsp;</text>
+                                            }
+                                        </li>
+                                        <li>
+                                            <span>Spoken languages:</span>
+                                            @foreach (var item in Model.spoken_languages)
+                                            {
+                                                @item.name
+
+                                                <text>&nbsp;</text>
+                                            }
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <ul>
+                                        <li><span>Scores:</span> 7.31 / 1,515</li>
+                                        <li><span>Rating:</span> 8.5 / 161 times</li>
+                                        <li><span>Duration:</span> @Model.runtime</li>
+                                        <li><span>Quality:</span> HD</li>
+                                        <li><span>Views:</span> @Model.popularity</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="anime__details__btn">
+                            <a asp-controller="Home" asp-action="Review" asp-route-id="@Model.id" class="follow-btn">Review</a>
+                            <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
+                            <a href="#" class="watch-btn">
+                                <span>Watch Now</span> <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-8 col-md-8">
+                <div class="anime__details__review">
+                    <div class="section-title"><h5>Production companies</h5></div>
+                    @foreach (var item in Model.production_companies)
+                    {
+                        <div class="anime__review__item">
+                            <div class="anime__review__item__pic">
+                                @if (item.logo_path != null)
+                                {
+                                    var logoUrl = "https://image.tmdb.org/t/p/original" + @item.logo_path;
+                                    <img style="background: whitesmoke" src="@logoUrl" />
+                                }
+                                else
+                                {
+                                    <img src="~/img/LOGO Bolta 200x200.jpg" />
+                                }
+                            </div>
+                            <div class="anime__review__item__text">
+                                <h6>@item.name - <span>@item.origin_country</span></h6>
+                                @*<p>item.content</p>*@
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="anime__details__review">
+                    <div class="section-title"><h5>Production countries</h5></div>
+                    @foreach (var item in Model.production_countries)
+                    {
+                        <div class="anime__review__item">
+                            <div class="anime__review__item__text">
+                                <h6>@item.name - <span>@item.iso_3166_1</span></h6>
+                                @*<p>item.content</p>*@
+                            </div>
+                        </div>
+                    }
+                </div>
+                
+                <div class="anime__details__form">
+                    <div class="section-title">
+                        <h5>Your Comment</h5>
+                    </div>
+                    <form action="#">
+                        <textarea placeholder="Your Comment"></textarea>
+                        <button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-4">
+                <div class="anime__details__sidebar">
+                    <div class="section-title">
+                        <h5>Belongs To Collection</h5>
+                    </div>
+
+                    @if (Model.belongs_to_collection != null)
+                    {
+                        var belongsUrl = "https://image.tmdb.org/t/p/original" + @Model.belongs_to_collection.poster_path;
+                        <h5><a href="#">@Model.belongs_to_collection.name</a></h5>
+                        <div class="product__sidebar__view__item set-bg" data-setbg="@belongsUrl">
+                            <img src="@belongsUrl" alt="">
+                            <div class="ep">@Model.belongs_to_collection.id</div>
+                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
+
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Anime Section End -->
