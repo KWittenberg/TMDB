@@ -5,6 +5,7 @@ public class CreditsDbo
     public int id { get; set; }
     public List<CastDbo> cast { get; set; }
     public List<CrewDbo> crew { get; set; }
+    
     //public MovieDetailsDbo MovieDetailsDbo { get; set; }
     //public int MovieDetailsDboId { get; set; }
 }
@@ -25,6 +26,9 @@ public class CastDbo
     public int? order { get; set; }
     public CreditsDbo CreditsDbo { get; set; }
     public int CreditsDboId { get; set; }
+
+    //public MovieDetailsDbo MovieDetailsDbo { get; set; }
+    //public int MovieDetailsDboId { get; set; }
 }
 
 public class CrewDbo
@@ -42,4 +46,7 @@ public class CrewDbo
     public string? job { get; set; }
     public CreditsDbo CreditsDbo { get; set; }
     public int CreditsDboId { get; set; }
+
+    //public MovieDetailsDbo MovieDetailsDbo { get; set; }
+    //public int MovieDetailsDboId { get; set; }
 }

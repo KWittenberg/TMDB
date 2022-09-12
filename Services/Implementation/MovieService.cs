@@ -1,4 +1,6 @@
-﻿namespace TMDB.MVC.Services.Implementation;
+﻿using TMDB.MVC.Models;
+
+namespace TMDB.MVC.Services.Implementation;
 
 public class MovieService : IMovieService
 {
@@ -115,7 +117,7 @@ public class MovieService : IMovieService
     public async Task<List<CreditsDbo>> GetCreditsAsync(int? id)
     {
         var dbo = await db.CreditsDbo
-            .Include(x=>x.cast)
+            .Include(x => x.cast)
             .Include(x => x.crew)
             .Where(x => x.id == id).ToListAsync();
         return dbo;
@@ -239,8 +241,8 @@ public class MovieService : IMovieService
                 string responseData = await response.Content.ReadAsStringAsync();
                 var model = JsonConvert.DeserializeObject<CreditsBinding>(responseData);
 
-                var movieCredits = await db.CreditsDbo.FirstOrDefaultAsync(x => x.id == id);
-                if (movieCredits == null)
+                var creditsId = await db.CreditsDbo.FirstOrDefaultAsync(x => x.id == id);
+                if (creditsId == null)
                 {
                     var dbo = mapper.Map<CreditsDbo>(model);
                     db.CreditsDbo.Add(dbo);

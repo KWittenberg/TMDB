@@ -3,7 +3,7 @@
 public class MovieDetailsDbo
 {
     [Key]
-    public int MovieDetailsId { get; set; }
+    public int MovieDetailsDboId { get; set; }
     public bool? adult { get; set; }
     public string? backdrop_path { get; set; }
     //public BelongsToCollectionDbo belongs_to_collection { get; set; }
@@ -30,6 +30,10 @@ public class MovieDetailsDbo
     public bool? video { get; set; }
     public double? vote_average { get; set; }
     public int? vote_count { get; set; }
+    //public List<CastDbo> CastDbo { get; set; }
+    //public List<CrewDbo> CrewDbo { get; set; }
+    //public CreditsDbo CreditsDbo { get; set; }
+    //public int CreditsDboId { get; set; }
 }
 
 

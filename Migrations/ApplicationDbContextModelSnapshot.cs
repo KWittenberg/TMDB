@@ -157,11 +157,11 @@ namespace TMDB.MVC.Migrations
 
             modelBuilder.Entity("TMDB.MVC.Models.MovieDetailsDbo", b =>
                 {
-                    b.Property<int>("MovieDetailsId")
+                    b.Property<int>("MovieDetailsDboId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MovieDetailsId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MovieDetailsDboId"), 1L, 1);
 
                     b.Property<bool?>("adult")
                         .HasColumnType("bit");
@@ -223,7 +223,7 @@ namespace TMDB.MVC.Migrations
                     b.Property<int?>("vote_count")
                         .HasColumnType("int");
 
-                    b.HasKey("MovieDetailsId");
+                    b.HasKey("MovieDetailsDboId");
 
                     b.ToTable("MovieDetailsDbo");
                 });

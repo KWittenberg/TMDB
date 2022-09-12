@@ -12,8 +12,8 @@ using TMDB.MVC.Data;
 namespace TMDB.MVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220911163821_init2")]
-    partial class init2
+    [Migration("20220912011214_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,118 @@ namespace TMDB.MVC.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("TMDB.MVC.Models.CastDbo", b =>
+                {
+                    b.Property<int?>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("id"), 1L, 1);
+
+                    b.Property<int>("CreditsDboId")
+                        .HasColumnType("int");
+
+                    b.Property<bool?>("adult")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("cast_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("character")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("credit_id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("known_for_department")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("order")
+                        .HasColumnType("int");
+
+                    b.Property<string>("original_name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("popularity")
+                        .HasColumnType("float");
+
+                    b.Property<string>("profile_path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("CreditsDboId");
+
+                    b.ToTable("CastDbo");
+                });
+
+            modelBuilder.Entity("TMDB.MVC.Models.CreditsDbo", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.HasKey("id");
+
+                    b.ToTable("CreditsDbo");
+                });
+
+            modelBuilder.Entity("TMDB.MVC.Models.CrewDbo", b =>
+                {
+                    b.Property<int?>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("id"), 1L, 1);
+
+                    b.Property<int>("CreditsDboId")
+                        .HasColumnType("int");
+
+                    b.Property<bool?>("adult")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("credit_id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("department")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("job")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("known_for_department")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("original_name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("popularity")
+                        .HasColumnType("float");
+
+                    b.Property<string>("profile_path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("CreditsDboId");
+
+                    b.ToTable("CrewDbo");
+                });
 
             modelBuilder.Entity("TMDB.MVC.Models.GenreDbo", b =>
                 {
@@ -47,11 +159,11 @@ namespace TMDB.MVC.Migrations
 
             modelBuilder.Entity("TMDB.MVC.Models.MovieDetailsDbo", b =>
                 {
-                    b.Property<int>("MovieDetailsId")
+                    b.Property<int>("MovieDetailsDboId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MovieDetailsId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MovieDetailsDboId"), 1L, 1);
 
                     b.Property<bool?>("adult")
                         .HasColumnType("bit");
@@ -113,7 +225,7 @@ namespace TMDB.MVC.Migrations
                     b.Property<int?>("vote_count")
                         .HasColumnType("int");
 
-                    b.HasKey("MovieDetailsId");
+                    b.HasKey("MovieDetailsDboId");
 
                     b.ToTable("MovieDetailsDbo");
                 });
@@ -204,6 +316,79 @@ namespace TMDB.MVC.Migrations
                     b.ToTable("ProductionCompanyDbo");
                 });
 
+            modelBuilder.Entity("TMDB.MVC.Models.ProductionCountryDbo", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<int>("MovieDetailsDboId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("iso_3166_1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("MovieDetailsDboId");
+
+                    b.ToTable("ProductionCountryDbo");
+                });
+
+            modelBuilder.Entity("TMDB.MVC.Models.SpokenLanguageDbo", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<int>("MovieDetailsDboId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("english_name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("iso_639_1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("MovieDetailsDboId");
+
+                    b.ToTable("SpokenLanguageDbo");
+                });
+
+            modelBuilder.Entity("TMDB.MVC.Models.CastDbo", b =>
+                {
+                    b.HasOne("TMDB.MVC.Models.CreditsDbo", "CreditsDbo")
+                        .WithMany("cast")
+                        .HasForeignKey("CreditsDboId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CreditsDbo");
+                });
+
+            modelBuilder.Entity("TMDB.MVC.Models.CrewDbo", b =>
+                {
+                    b.HasOne("TMDB.MVC.Models.CreditsDbo", "CreditsDbo")
+                        .WithMany("crew")
+                        .HasForeignKey("CreditsDboId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CreditsDbo");
+                });
+
             modelBuilder.Entity("TMDB.MVC.Models.GenreDbo", b =>
                 {
                     b.HasOne("TMDB.MVC.Models.MovieDetailsDbo", "MovieDetailsDbo")
@@ -226,11 +411,44 @@ namespace TMDB.MVC.Migrations
                     b.Navigation("MovieDetailsDbo");
                 });
 
+            modelBuilder.Entity("TMDB.MVC.Models.ProductionCountryDbo", b =>
+                {
+                    b.HasOne("TMDB.MVC.Models.MovieDetailsDbo", "MovieDetailsDbo")
+                        .WithMany("production_countries")
+                        .HasForeignKey("MovieDetailsDboId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MovieDetailsDbo");
+                });
+
+            modelBuilder.Entity("TMDB.MVC.Models.SpokenLanguageDbo", b =>
+                {
+                    b.HasOne("TMDB.MVC.Models.MovieDetailsDbo", "MovieDetailsDbo")
+                        .WithMany("spoken_languages")
+                        .HasForeignKey("MovieDetailsDboId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MovieDetailsDbo");
+                });
+
+            modelBuilder.Entity("TMDB.MVC.Models.CreditsDbo", b =>
+                {
+                    b.Navigation("cast");
+
+                    b.Navigation("crew");
+                });
+
             modelBuilder.Entity("TMDB.MVC.Models.MovieDetailsDbo", b =>
                 {
                     b.Navigation("genres");
 
                     b.Navigation("production_companies");
+
+                    b.Navigation("production_countries");
+
+                    b.Navigation("spoken_languages");
                 });
 #pragma warning restore 612, 618
         }

@@ -11,7 +11,7 @@ public interface IMovieService
     Task<List<GenreDbo>> GetGenreAsync(int? id);
 
 
-    Task<List<CreditsDbo>> GetCreditsAsync(int? id);
+    //Task<List<CreditsDbo>> GetCreditsAsync(int? id);
     Task<List<CastDbo>> GetCastAsync(int? id);
     Task<List<CrewDbo>> GetCrewAsync(int? id);
 

@@ -3,9 +3,9 @@
 @{
     ViewData["Title"] = "DetailsDb";
     var imageUrl = "https://image.tmdb.org/t/p/original" + Model.poster_path;
-    var genres = await movieService.GetGenreAsync(Model.MovieDetailsId);
-    var casts = await movieService.GetCastAsync(Model.MovieDetailsId);
-    var crews = await movieService.GetCrewAsync(Model.MovieDetailsId);
+    var genres = await movieService.GetGenreAsync(Model.MovieDetailsDboId);
+    var casts = await movieService.GetCastAsync(Model.MovieDetailsDboId);
+    var crews = await movieService.GetCrewAsync(Model.MovieDetailsDboId);
     //var reviews = await movieService.GetMovieReview(Model.id);
     //var credits = await movieService.GetMovieCredits(Model.MovieDetailsId);
 }
